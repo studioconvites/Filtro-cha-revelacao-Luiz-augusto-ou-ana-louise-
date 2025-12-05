@@ -60,7 +60,7 @@
       margin-bottom: 8px;
     }
     #save-btn, #retry-btn {
-      background: #e8d6b1; COR PARA ALTERAR
+      background: #d8d6b1; COR PARA ALTERAR
       color: white;
       border-radius: 6px;
       padding: 8px 16px;
@@ -113,7 +113,7 @@
       background: #000;
     }
     #save-video-btn {
-      background: #e8d6b1; COR PARA ALTERAR
+      background: #d8d6b1; COR PARA ALTERAR
       color: white;
       border-radius: 6px;
       padding: 8px 16px;
@@ -146,7 +146,7 @@
       border-radius: 12px;
       font-size: 15px;
       font-weight: bold;
-       text-align: center; 
+      text-align: center;
       max-width: 80%;
       display: none;
     }
@@ -227,7 +227,7 @@
     const startRecordBtn = document.getElementById('start-recording');
     const stopRecordBtn = document.getElementById('stop-recording');
     const recordingIndicator = document.getElementById('recording-indicator');
-     const recordingCanvas = document.getElementById('recordingCanvas'); 
+    const recordingCanvas = document.getElementById('recordingCanvas');
 
     const videoPreviewContainer = document.getElementById('video-preview-container');
     const videoPreviewEl = document.getElementById('video-preview');
@@ -343,7 +343,7 @@
 
     function stopRecordingTimer() {
       if (recordTimerInterval) {
-         clearInterval(recordTimerInterval); 
+        clearInterval(recordTimerInterval);
         recordTimerInterval = null;
       }
       recordingIndicator.style.display = 'none';
@@ -451,13 +451,13 @@
         const blob = new Blob(recordedChunks, { type: recordedMimeType });
 
         if (!blob || blob.size === 0) {
-           alert('Nenhum dado de vídeo foi gravado.'); 
+          alert('Nenhum dado de vídeo foi gravado.');
           startRecordBtn.style.display = 'inline-block';
- stopRecordBtn.style.display = "nenhum"; 
- Retorno; 
-         } 
+          stopRecordBtn.style.display = 'none';
+          return;
+        }
 
-            // Envia o vídeo para o servidor converter em MP4    
+        // Envia o vídeo para o servidor converter em MP4
         showLoading();
         setButtonsDisabledDuringProcess(true);
 
@@ -477,83 +477,83 @@
             try {
               erroTxt = await resposta.text();
             } catch (e) {}
-                     console.error('Erro na conversão no servidor:',  console.error('Erro na conversão no servidor:', erroTxt) ;    error('Erro na conversão no servidor:' console , erroTxt)erroTxt) ;    error('Erro na conversão no servidor:' console console.error('Erro na conversão no servidor:', erroTxt) ;    error('Erro na conversão no servidor:'  .error('Erro na conversão no servidor:', erroTxt) ;    error('Erro na conversão no servidor:', erroTxt);     error('Erro na conversão no servidor:', erroTxt);        error('Erro na conversão no servidor:', erroTxt) ;    error('Erro na conversão no servidor:', erroTxt);     error('Erro na conversão no servidor:', erroTxt);        , erroTxt);     ererror('Erro na conversão no servidor:', erroTxt);        error('Erro na conversão no servidor:', erroTxt) ;    error('Erro na conversão no servidor:', erroTxt);     error('Erro na conversão no servidor:') ;    error('Erro na conversão no servidor:' console console.error('Erro na conversão no servidor:', erroTxt) ;    error('Erro na conversão no servidor:'  .error('Erro na conversão no servidor:', erroTxt) ;    error('Erro na conversão no servidor:', erroTxt);     error('Erro na conversão no servidor:', erroTxt);        error('Erro na conversão no servidor:', erroTxt) ;    error('Erro na conversão no servidor:', erroTxt);     error('Erro na conversão no servidor:', erroTxt);        , erroTxt);     error('Erro na conversão no servidor:', erroTxt);       console.error('Erro na conversão no servidor:', erroTxt) ;    error('Erro na conversão no servidor:', erroTxt);     error('Erro na conversão no servidor:', erroTxt);       erroTxt);     error('Erro na conversão no servidor:', erroTxt);       console.error('Erro na conversão no servidor:', erroTxt) ;    error('Erro na conversão no servidor:', erroTxt);     error('Erro na conversão no servidor:', erroTxt);      
-                     alert('Ocorreu um erro ao converter o vídeo. Tente novamente.');    alert('Ocorreu um erro ao converter o vídeo. Tente novamente.');    ('Ocorreu um erro ao converter o vídeo. Tente novamente.') alert('Ocorreu um erro ao converter o vídeo. Tente novamente.');    ('Ocorreu um erro ao converter o vídeo. Tente novamente.');       ;    ('Ocorreu um erro ao converter o vídeo. Tente novamente.');       alert('Ocorreu um erro ao converter o vídeo. Tente novamente.');    ('Ocorreu um erro ao converter o vídeo. Tente novamente.');        ;       ;    ('Ocorreu um ('Ocorreu um erro ao converter o vídeo. Tente novamente.') alert('Ocorreu um erro ao converter o vídeo. Tente novamente.');    ('Ocorreu um erro ao converter o vídeo. Tente novamente.');       ;    ('Ocorreu um erro ao converter o vídeo. Tente novamente.');       alert('Ocorreu um erro ao converter o vídeo. Tente novamente.');    ('Ocorreu um erro ao converter o vídeo. Tente novamente.');        ;       ;    ('Ocorreu um alert('Ocorreu um erro ao converter o vídeo. Tente novamente.') alert('Ocorreu um erro ao converter o vídeo. Tente novamente.');    ('Ocorreu um erro ao converter o vídeo. Tente novamente.') alert('Ocorreu um erro ao converter o vídeo. Tente novamente.');    ('Ocorreu um erro ao converter o vídeo. Tente novamente.');       ;    ('Ocorreu um erro ao converter o vídeo. Tente novamente.');       alert('Ocorreu um erro ao converter o vídeo. Tente novamente.');    ('Ocorreu um erro ao converter o vídeo. Tente novamente.');        ;       ;    ('Ocorreu um erro ao converter o vídeo. Tente novamente.');       alert('Ocorreu um erro ao converter o vídeo. Tente novamente.');    ('Ocorreu um erro ao converter o vídeo. Tente novamente.');       ('Ocorreu um erro ao converter o vídeo. Tente novamente.');       alert('Ocorreu um erro ao converter o vídeo. Tente novamente.');    ('Ocorreu um erro ao converter o vídeo. Tente novamente.');      
-        }  mais  {       }  mais  {      }  mais  {       }  mais  {       
-   const mp4Blob = aguardar resposta.blob();    const mp4Blob = aguardar resposta.blob();   const mp4Blob = aguardar resposta.blob();  const mp4Blob = aguardar resposta.blob(); const mp4Blob = await resposta.blob();const mp4Blob = aguardar resposta.blob();   const mp4Blob = aguardar resposta.blob(); const mp4Blob = aguardar resposta.blob();    const mp4Blob = aguardar resposta.blob();   const mp4Blob = aguardar resposta.blob();  const mp4Blob = aguardar resposta.blob(); const mp4Blob = await resposta.blob();const mp4Blob = aguardar resposta.blob();   const mp4Blob = aguardar resposta.blob();   
- consturl = URL.createObjectURL (mp4Blob); const url = URL.createObjectURL(mp4Blob);
- última URL do vídeo = URL; lastVideoUrl = url;
+            console.error('Erro na conversão no servidor:', erroTxt);
+            alert('Ocorreu um erro ao converter o vídeo. Tente novamente.');
+          } else {
+            const mp4Blob = await resposta.blob();
+            const url = URL.createObjectURL(mp4Blob);
+            lastVideoUrl = url;
 
- consta = document.createElement('a'); const a = document.createElement('a');
- a.style.display = "nenhum"; a.style.display = 'none';
- a.href = URL; a.href = url;
- a.download = 'video-moldura.mp4'; 
-             document.body.appendChild(a); 
-             background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR   #e8d6b1 background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR        background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR       COR PARA ALTERAR  #e8d6b1 background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR       COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1 ; COR PARA ALTERAR       COR PARA ALTERAR       background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR ; COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1 ; COR PARA ALTERAR       COR PARA ALTERAR       background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1 ; COR PARA ALTERAR       COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1 ; COR PARA ALTERAR       COR PARA ALTERAR       background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR ; COR PARA ALTERAR       COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1 ; COR PARA ALTERAR       COR PARA ALTERAR       background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR       ; COR PARA ALTERAR       COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1 ; COR PARA ALTERAR       COR PARA ALTERAR       background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR        ; COR PARA ALTERAR       COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1 ; COR PARA ALTERAR       COR PARA ALTERAR       background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR        ; COR PARA ALTERAR       COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1 ; COR PARA ALTERAR       COR PARA ALTERAR       background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR        ; COR PARA ALTERAR       COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1 ; COR PARA ALTERAR       COR PARA ALTERAR       background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR   #e8d6b1; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR        
- setTimeout(() => { 
-               document.body.removeChild(a); 
-             }, 1000); }, 1000);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'video-moldura.mp4';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+              document.body.removeChild(a);
+            }, 1000);
 
-                    // iPhone: mostra instruções de Arquivos        
- Se (ISOS) { if (isiOS) {
- videoPreviewContainer.style.display = "flexo"; videoPreviewContainer.style.display = 'flex';
- videoPreviewEl.style.display = "nenhum"; videoPreviewEl.style.display = 'none';
- saveVideoBtn.style.display = "nenhum"; saveVideoBtn.style.display = 'none';
- videoInstructions.style.display = "bloco"; videoInstructions.style.display = 'block';
- } mais { } else {
- videoPreviewContainer.style.display = "nenhum"; videoPreviewContainer.style.display = 'none';
-              }  
+            // iPhone: mostra instruções de Arquivos
+            if (isiOS) {
+              videoPreviewContainer.style.display = 'flex';
+              videoPreviewEl.style.display = 'none';
+              saveVideoBtn.style.display = 'none';
+              videoInstructions.style.display = 'block';
+            } else {
+              videoPreviewContainer.style.display = 'none';
+            }
 
- URL.revogar ObjectURL (url); URL.revokeObjectURL(url);
-             recordTimerInterval = setInterval(() => {   setInterval(() => {    setInterval(() => {   setInterval(() => {       {   setInterval(() => {      recordTimerInterval = setInterval(() => {   setInterval(() => {    setInterval(() => {   setInterval(() => {     recordTimerInterval = setInterval(() => {   setInterval(() => {    setInterval(() => {   setInterval(() => { {   setInterval(() => {      recordTimerInterval = setInterval(() => {   setInterval(() => {    setInterval(() => {   setInterval(() => {     recordTimerInterval = setInterval(() => {   setInterval(() => {    setInterval(() => {   setInterval(() => {     
-           text-align: center;     
-                   console.error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err);     error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err) console.error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err);     error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err);      , err);      console.error('Er  , err) console.error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err);     error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err) console.error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err);     error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err);      , err);      console.error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err);     error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err);       ;      , err);      console.error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err);     error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:',   err);      err);      console.error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err);     error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err);  err);      err);      console.error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err);     error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err); err);      err);      console.error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err);     error('Erro ao enviar vídeo para o servidor:', err);    error('Erro ao enviar vídeo para o servidor:', err);                 
-                  alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');       alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');      ('Erro ao enviar o vídeo para o servidor.');      alert('Erro ao enviar o vídeo par alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');       alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');       alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');       alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');       alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');      ('Erro ao enviar o vídeo para o servidor.');      alert('Erro ao enviar o vídeo par  alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     alert('Erro ao enviar o vídeo para o servidor.')  alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');       alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');       alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');      ('Erro ao enviar o vídeo para o servidor.');      alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.') ;      ('Erro ao enviar o vídeo para o servidor.') ('Erro ao enviar o vídeo para o servidor.');      alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     alert('Erro ao enviar o vídeo para o servidor.'); ;      ('Erro ao enviar o vídeo para o servidor.') ('Erro ao enviar o vídeo para o servidor.');      alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     alert('Erro ao enviar o vídeo para o servidor.');             ('Erro ao enviar o vídeo para o servidor.');      alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     alert('Erro ao enviar o vídeo para o servidor.');    ('Erro ao enviar o vídeo para o servidor.');     
- } Finalmente { } finally {
-  ocultar Carregamento(); hideLoading();
- setButtonsDisabledDuringProcess (falso); setButtonsDisabledDuringProcess(false);
-  startRecordBtn.style.display = "bloco em linha"; startRecordBtn.style.display = 'inline-block';
- stopRecordBtn.style.display = "nenhum"; stopRecordBtn.style.display = 'none';
-         } 
-       }; 
+            URL.revokeObjectURL(url);
+          }
+        } catch (err) {
+          console.error('Erro ao enviar vídeo para o servidor:', err);
+          alert('Erro ao enviar o vídeo para o servidor.');
+        } finally {
+          hideLoading();
+          setButtonsDisabledDuringProcess(false);
+          startRecordBtn.style.display = 'inline-block';
+          stopRecordBtn.style.display = 'none';
+        }
+      };
 
-  iniciar o tempo de gravação(); startRecordingTimer();
- mediaRecorder.start(100); mediaRecorder.start(100);
+      startRecordingTimer();
+      mediaRecorder.start(100);
 
- startRecordBtn.style.display = "nenhum"; startRecordBtn.style.display = 'none';
- stopRecordBtn.style.display = "bloco em linha"; 
-     } 
+      startRecordBtn.style.display = 'none';
+      stopRecordBtn.style.display = 'inline-block';
+    }
 
- startRecordBtn.onclick = () => { 
- se (é Gravação) retornar; 
- iniciar Gravação de vídeo(); 
-     }; };
+    startRecordBtn.onclick = () => {
+      if (isRecording) return;
+      startVideoRecording();
+    };
 
- stopRecordBtn.onclick = () => { 
-              // Resolução reduzida (640 de largura) para estabilidade em Android,       // Resolução reduzida (640 de largura) para estabilidade em Android,       // Resolução reduzida (640 de largura) para estabilidade em Android,      // Resolução reduzida (640 de largura) para estabilidade em Android,       
-             // ainda com boa qualidade para redes sociais       
-       } }
-     }; };
+    stopRecordBtn.onclick = () => {
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+      }
+    };
 
- salvarVideoBtn.onclick = () => { saveVideoBtn.onclick = () => {
- se (!lastVideoUrl) retornar; if (!lastVideoUrl) return;
- consta = document.createElement('a'); const a = document.createElement('a');
- a.style.display = "nenhum"; 
- a.href = última Volta de Vídeo; 
- constext = gravadoMimeType.inclui('mp4') ? 'mp4': 'webm'; 
-            const rctx = recordingCanvas.getContext('2d');      
-           background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR       ; COR PARA ALTERAR       background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR       background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR      background: #e8d6b1  ; COR PARA ALTERAR  #e8d6b1; COR PARA ALTERAR      
- a.clique(); 
- setTimeout(() => { 
-         document.body.removeChild(a); 
-       }, 1000); 
+    saveVideoBtn.onclick = () => {
+      if (!lastVideoUrl) return;
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = lastVideoUrl;
+      const ext = recordedMimeType.includes('mp4') ? 'mp4' : 'webm';
+      a.download = 'video-moldura.' + ext;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        document.body.removeChild(a);
+      }, 1000);
 
- Se (ISOS) { 
-               if (!isRecording) return;      if (!isRecording) return;     if (!isRecording) return;      
-       } }
-     }; };
+      if (isiOS) {
+        videoInstructions.style.display = 'block';
+      }
+    };
 
- iniciar a câmera(); 
-  </script></script> </Roteiro>
+    startCamera();
+  </script>
 </body>
-<HTML>
+</html>
