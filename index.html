@@ -27,43 +27,55 @@
 
   #overlay {
     pointer-events: none;
-    z-index: 7;
+    z-index: 10;
   }
 
-  /* BEAUTY FILTER EXTRA FORTE – cobre manchas */
-  #beauty-filter {
+  /* ULTRA BEAUTY FILTER — CAMADA 1 (cobertura principal) */
+  #beauty-1 {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background: rgba(255, 120, 150, 0.60); /* cor mais saturada */
+    background: rgba(255, 110, 140, 0.70);
     mix-blend-mode: soft-light;
     pointer-events: none;
     top: 0;
     left: 0;
-    z-index: 5;
+    z-index: 4;
   }
 
-  /* SEGUNDA CAMADA – realça brilho e uniformização */
-  #beauty-filter-2 {
+  /* CAMADA 2 — brilho + luz suave */
+  #beauty-2 {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background: rgba(255, 180, 200, 0.40);
+    background: rgba(255, 170, 190, 0.45);
     mix-blend-mode: overlay;
     pointer-events: none;
-    top: 0;
-    left: 0;
+    z-index: 5;
+  }
+
+  /* CAMADA 3 — tonalidade de pele mais uniforme */
+  #beauty-3 {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center,
+                                rgba(255, 200, 210, 0.50) 0%,
+                                rgba(255, 150, 170, 0.40) 50%,
+                                rgba(255, 120, 150, 0.30) 100%);
+    mix-blend-mode: soft-light;
+    pointer-events: none;
     z-index: 6;
   }
 
-  /* CAMADA DE SUAVIZAÇÃO (efeito blur suave) */
+  /* BLUR MAIS FORTE */
   #soft-blur {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    backdrop-filter: blur(2px); /* suavização leve */
+    backdrop-filter: blur(4px); /* AQUI A SUAVIZAÇÃO FICA REALMENTE FORTE */
     pointer-events: none;
-    z-index: 4;
+    z-index: 3;
   }
 
   #buttons {
@@ -148,12 +160,13 @@
 
 <video id="video" autoplay playsinline muted></video>
 
-<!-- CAMADA DE SUAVIZAÇÃO -->
+<!-- BLUR -->
 <div id="soft-blur"></div>
 
-<!-- FILTROS DE PELE -->
-<div id="beauty-filter"></div>
-<div id="beauty-filter-2"></div>
+<!-- TRÊS CAMADAS DE BEAUTY FILTER -->
+<div id="beauty-1"></div>
+<div id="beauty-2"></div>
+<div id="beauty-3"></div>
 
 <!-- MOLDURA -->
 <img id="overlay" src="moldura.png" alt="Moldura"/>
@@ -169,9 +182,7 @@
   <img id="photo-preview">
   <button id="save-btn">Salvar</button>
   <button id="retry-btn">Tentar de novo</button>
-  <div id="instructions">
-    No iPhone, toque e segure a imagem para salvar.
-  </div>
+  <div id="instructions">No iPhone, toque e segure para salvar.</div>
 </div>
 
 <script>
@@ -193,7 +204,7 @@
     video.style.transform = usingFrontCamera ? "scaleX(-1)" : "scaleX(1)";
   }
 
-  switchCamera.onclick = () => {
+  switch-camera.onclick = () => {
     usingFrontCamera = !usingFrontCamera;
     startCamera();
   };
@@ -216,18 +227,26 @@
 
     ctx.drawImage(video, 0, 0, w, h);
 
-    /* BEAUTY FILTER NA FOTO – reforçado */
+    /* BEAUTY FILTER NA FOTO – ULTRA++ */
     ctx.globalCompositeOperation = "soft-light";
-    ctx.fillStyle = "rgba(255, 120, 150, 0.60)";
+    ctx.fillStyle = "rgba(255, 110, 140, 0.70)";
     ctx.fillRect(0, 0, w, h);
 
     ctx.globalCompositeOperation = "overlay";
-    ctx.fillStyle = "rgba(255, 180, 200, 0.40)";
+    ctx.fillStyle = "rgba(255, 170, 190, 0.45)";
     ctx.fillRect(0, 0, w, h);
 
-    /* SUAVIZAÇÃO EXTRA (blur simulado) */
-    ctx.globalAlpha = 0.25;
-    ctx.filter = "blur(2px)";
+    /* radial uniformizer */
+    ctx.globalCompositeOperation = "soft-light";
+    let grad = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, w);
+    grad.addColorStop(0, "rgba(255, 200, 210, 0.50)");
+    grad.addColorStop(1, "rgba(255, 120, 150, 0.30)");
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+
+    /* blur extra */
+    ctx.globalAlpha = 0.35;
+    ctx.filter = "blur(4px)";
     ctx.drawImage(canvas, 0, 0, w, h);
     ctx.filter = "none";
     ctx.globalAlpha = 1;
