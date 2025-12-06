@@ -31,13 +31,26 @@
     z-index: 6;
   }
 
-  /* BEAUTY FILTER AUMENTADO — mais forte, mais aparente */
+  /* BEAUTY FILTER ULTRA FORTE */
   #beauty-filter {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background: rgba(255, 140, 160, 0.35); /* filtro mais intenso */
+    background: rgba(255, 120, 150, 0.55); /* cor bem mais intensa */
     mix-blend-mode: soft-light;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    z-index: 5;
+  }
+
+  /* EXTRA GLOW — ainda mais forte */
+  #beauty-filter-2 {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 160, 180, 0.30);
+    mix-blend-mode: overlay;
     pointer-events: none;
     top: 0;
     left: 0;
@@ -130,6 +143,7 @@
 
 <!-- BEAUTY FILTER AO VIVO -->
 <div id="beauty-filter"></div>
+<div id="beauty-filter-2"></div>
 
 <!-- MOLDURA -->
 <img id="overlay" src="moldura.png" alt="Moldura"/>
@@ -203,9 +217,13 @@
 
     ctx.drawImage(video, 0, 0, w, h);
 
-    /* BEAUTY FILTER MAIS FORTE NA FOTO TAMBÉM */
+    /* BEAUTY FILTER ULTRA FORTE NA FOTO */
     ctx.globalCompositeOperation = "soft-light";
-    ctx.fillStyle = "rgba(255, 140, 160, 0.35)"; 
+    ctx.fillStyle = "rgba(255, 120, 150, 0.55)";
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.globalCompositeOperation = "overlay";
+    ctx.fillStyle = "rgba(255, 160, 180, 0.30)";
     ctx.fillRect(0, 0, w, h);
 
     ctx.globalCompositeOperation = "source-over";
