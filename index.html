@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CHÁ REVELAÇÃO LUIZ AUGUSTO OU ANA LOUISE </title>
+<title>CHÁ REVELAÇÃO LUIZ AUGUSTO OU ANA LOUISE</title>
 
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,6 +28,20 @@
 
   #overlay {
     pointer-events: none;
+    z-index: 6;
+  }
+
+  /* BEAUTY FILTER — efeito estilo Instagram */
+  #beauty-filter {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 150, 150, 0.15); /* glow rosadinho */
+    mix-blend-mode: soft-light;           /* mistura suave com a pele */
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    z-index: 5;
   }
 
   /* Botões */
@@ -113,6 +127,11 @@
 <body>
 
 <video id="video" autoplay playsinline muted></video>
+
+<!-- BEAUTY FILTER AO VIVO -->
+<div id="beauty-filter"></div>
+
+<!-- MOLDURA POR CIMA -->
 <img id="overlay" src="moldura.png" alt="Moldura"/>
 
 <div id="buttons">
@@ -184,7 +203,14 @@
 
     ctx.drawImage(video, 0, 0, w, h);
 
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    /* BEAUTY FILTER NA FOTO TAMBÉM */
+    ctx.globalCompositeOperation = "soft-light";
+    ctx.fillStyle = "rgba(255, 150, 150, 0.15)"; 
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.globalCompositeOperation = "source-over";
+
+    /* MOLDURA */
     ctx.drawImage(overlay, 0, 0, w, h);
 
     photoPreview.src = canvas.toDataURL("image/png");
