@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Moldura Interativa - Studio Convites</title>
+<title>CHÁ REVELAÇÃO LUIZ AUGUSTO OU ANA LOUISE</title>
 
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -11,11 +11,12 @@
   body, html {
     width: 100%;
     height: 100%;
-    background: #f7f3ef;
+    background: #f7f3ef; /* Nude clarinho */
     font-family: "Poppins", sans-serif;
     overflow: hidden;
   }
 
+  /* Vídeo + Moldura */
   #video, #overlay {
     position: absolute;
     width: 100vw;
@@ -27,57 +28,9 @@
 
   #overlay {
     pointer-events: none;
-    z-index: 10;
   }
 
-  /* ULTRA BEAUTY FILTER — CAMADA 1 (cobertura principal) */
-  #beauty-1 {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(255, 110, 140, 0.70);
-    mix-blend-mode: soft-light;
-    pointer-events: none;
-    top: 0;
-    left: 0;
-    z-index: 4;
-  }
-
-  /* CAMADA 2 — brilho + luz suave */
-  #beauty-2 {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(255, 170, 190, 0.45);
-    mix-blend-mode: overlay;
-    pointer-events: none;
-    z-index: 5;
-  }
-
-  /* CAMADA 3 — tonalidade de pele mais uniforme */
-  #beauty-3 {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background: radial-gradient(circle at center,
-                                rgba(255, 200, 210, 0.50) 0%,
-                                rgba(255, 150, 170, 0.40) 50%,
-                                rgba(255, 120, 150, 0.30) 100%);
-    mix-blend-mode: soft-light;
-    pointer-events: none;
-    z-index: 6;
-  }
-
-  /* BLUR MAIS FORTE */
-  #soft-blur {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    backdrop-filter: blur(4px); /* AQUI A SUAVIZAÇÃO FICA REALMENTE FORTE */
-    pointer-events: none;
-    z-index: 3;
-  }
-
+  /* Botões */
   #buttons {
     position: absolute;
     bottom: 40px;
@@ -105,6 +58,7 @@
     transform: scale(0.95);
   }
 
+  /* Preview */
   #preview-container {
     position: absolute;
     bottom: 50px;
@@ -159,16 +113,6 @@
 <body>
 
 <video id="video" autoplay playsinline muted></video>
-
-<!-- BLUR -->
-<div id="soft-blur"></div>
-
-<!-- TRÊS CAMADAS DE BEAUTY FILTER -->
-<div id="beauty-1"></div>
-<div id="beauty-2"></div>
-<div id="beauty-3"></div>
-
-<!-- MOLDURA -->
 <img id="overlay" src="moldura.png" alt="Moldura"/>
 
 <div id="buttons">
@@ -182,12 +126,26 @@
   <img id="photo-preview">
   <button id="save-btn">Salvar</button>
   <button id="retry-btn">Tentar de novo</button>
-  <div id="instructions">No iPhone, toque e segure para salvar.</div>
+  <div id="instructions">
+    No iPhone, toque e segure a imagem para salvar.
+  </div>
 </div>
 
 <script>
   let usingFrontCamera = true;
   let stream;
+
+  const video = document.getElementById("video");
+  const overlay = document.getElementById("overlay");
+  const canvas = document.getElementById("canvas");
+  const captureBtn = document.getElementById("capture");
+  const switchCameraBtn = document.getElementById("switch-camera");
+  const previewContainer = document.getElementById("preview-container");
+  const photoPreview = document.getElementById("photo-preview");
+  const saveBtn = document.getElementById("save-btn");
+  const retryBtn = document.getElementById("retry-btn");
+  const instructions = document.getElementById("instructions");
+  const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   async function startCamera() {
     if (stream) stream.getTracks().forEach(t => t.stop());
@@ -204,20 +162,19 @@
     video.style.transform = usingFrontCamera ? "scaleX(-1)" : "scaleX(1)";
   }
 
-  switch-camera.onclick = () => {
+  switchCameraBtn.onclick = () => {
     usingFrontCamera = !usingFrontCamera;
     startCamera();
   };
 
-  capture.onclick = () => {
-    const t = stream.getVideoTracks()[0];
-    const s = t.getSettings();
-    const w = s.width;
-    const h = s.height;
+  captureBtn.onclick = () => {
+    const track = stream.getVideoTracks()[0];
+    const settings = track.getSettings();
+    const w = settings.width;
+    const h = settings.height;
 
     canvas.width = w;
     canvas.height = h;
-
     const ctx = canvas.getContext("2d");
 
     if (usingFrontCamera) {
@@ -227,50 +184,23 @@
 
     ctx.drawImage(video, 0, 0, w, h);
 
-    /* BEAUTY FILTER NA FOTO – ULTRA++ */
-    ctx.globalCompositeOperation = "soft-light";
-    ctx.fillStyle = "rgba(255, 110, 140, 0.70)";
-    ctx.fillRect(0, 0, w, h);
-
-    ctx.globalCompositeOperation = "overlay";
-    ctx.fillStyle = "rgba(255, 170, 190, 0.45)";
-    ctx.fillRect(0, 0, w, h);
-
-    /* radial uniformizer */
-    ctx.globalCompositeOperation = "soft-light";
-    let grad = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, w);
-    grad.addColorStop(0, "rgba(255, 200, 210, 0.50)");
-    grad.addColorStop(1, "rgba(255, 120, 150, 0.30)");
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, w, h);
-
-    /* blur extra */
-    ctx.globalAlpha = 0.35;
-    ctx.filter = "blur(4px)";
-    ctx.drawImage(canvas, 0, 0, w, h);
-    ctx.filter = "none";
-    ctx.globalAlpha = 1;
-
-    ctx.globalCompositeOperation = "source-over";
-
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.drawImage(overlay, 0, 0, w, h);
 
     photoPreview.src = canvas.toDataURL("image/png");
     previewContainer.style.display = "flex";
   };
 
-  save-btn.onclick = () => {
+  saveBtn.onclick = () => {
     const a = document.createElement("a");
     a.href = photoPreview.src;
     a.download = "foto.png";
     a.click();
 
-    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      instructions.style.display = "block";
-    }
+    if (isiOS) instructions.style.display = "block";
   };
 
-  retry-btn.onclick = () => {
+  retryBtn.onclick = () => {
     previewContainer.style.display = "none";
     instructions.style.display = "none";
   };
