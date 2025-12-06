@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CHÁ REVELAÇÃO LUIZ AUGUSTO OU ANA LOUISE</title>
+<title>Moldura Interativa - Studio Convites</title>
 
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -11,12 +11,12 @@
   body, html {
     width: 100%;
     height: 100%;
-    background: #f7f3ef; /* Nude clarinho */
+    background: #f7f3ef;
     font-family: "Poppins", sans-serif;
     overflow: hidden;
   }
 
-  /* Vídeo + Moldura */
+  /* VÍDEO E MOLDURA */
   #video, #overlay {
     position: absolute;
     width: 100vw;
@@ -31,20 +31,20 @@
     z-index: 6;
   }
 
-  /* BEAUTY FILTER — efeito estilo Instagram */
+  /* BEAUTY FILTER AUMENTADO — mais forte, mais aparente */
   #beauty-filter {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background: rgba(255, 150, 150, 0.15); /* glow rosadinho */
-    mix-blend-mode: soft-light;           /* mistura suave com a pele */
+    background: rgba(255, 140, 160, 0.35); /* filtro mais intenso */
+    mix-blend-mode: soft-light;
     pointer-events: none;
     top: 0;
     left: 0;
     z-index: 5;
   }
 
-  /* Botões */
+  /* BOTÕES */
   #buttons {
     position: absolute;
     bottom: 40px;
@@ -72,7 +72,7 @@
     transform: scale(0.95);
   }
 
-  /* Preview */
+  /* PREVIEW */
   #preview-container {
     position: absolute;
     bottom: 50px;
@@ -131,7 +131,7 @@
 <!-- BEAUTY FILTER AO VIVO -->
 <div id="beauty-filter"></div>
 
-<!-- MOLDURA POR CIMA -->
+<!-- MOLDURA -->
 <img id="overlay" src="moldura.png" alt="Moldura"/>
 
 <div id="buttons">
@@ -203,9 +203,9 @@
 
     ctx.drawImage(video, 0, 0, w, h);
 
-    /* BEAUTY FILTER NA FOTO TAMBÉM */
+    /* BEAUTY FILTER MAIS FORTE NA FOTO TAMBÉM */
     ctx.globalCompositeOperation = "soft-light";
-    ctx.fillStyle = "rgba(255, 150, 150, 0.15)"; 
+    ctx.fillStyle = "rgba(255, 140, 160, 0.35)"; 
     ctx.fillRect(0, 0, w, h);
 
     ctx.globalCompositeOperation = "source-over";
