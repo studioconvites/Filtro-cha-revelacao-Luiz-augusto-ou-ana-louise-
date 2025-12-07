@@ -1,139 +1,150 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Moldura Interativa - Studio Convites</title>
 
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body, html {
-    width: 100%;
-    height: 100%;
-    background: #f7f3ef;
-    font-family: "Poppins", sans-serif;
-    overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: #f7f3ef;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
 }
 
 /* Vídeo + Moldura */
 #video, #overlay {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    top: 0;
-    left: 0;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  top: 0;
+  left: 0;
 }
 
-#overlay { pointer-events: none; }
+#overlay {
+  pointer-events: none;
+}
 
-/* Botões principais (round) */
+/* Botões inferiores */
 #buttons {
-    position: absolute;
-    bottom: 40px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    z-index: 20;
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  z-index: 20;
 }
 
 button {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%; /* AGORA SÃO REDONDOS */
-    border: none;
-    background: #f2e3d6; /* Nude claro */
-    font-size: 26px;
-    color: #5e4634;
-    cursor: pointer;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    transition: 0.2s;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%; /* REDONDOS */
+  border: none;
+  background: #f1dfd2; /* Nude claro */
+  font-size: 26px;
+  color: #5e4634;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  transition: 0.2s;
 }
 
-button:active { transform: scale(0.95); }
+button:active {
+  transform: scale(0.95);
+}
 
-/* PREVIEW EM TELA CHEIA */
+/* Preview em tela cheia */
 #preview-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: calc(100vh - 120px); /* deixa espaço para botões */
-    display: none;
-    justify-content: center;
-    align-items: center;
-    background: rgba(255,255,255,0.9);
-    z-index: 25;
-    padding-top: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255,255,255,0.95);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 50;
 }
 
 #photo-preview {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* evita cortes */
-}
-
-/* Área dos botões inferiores da prévia */
-#preview-actions {
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+  width: 90vw;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 3px solid #e4cec0;
+  margin-bottom: 20px;
 }
 
 /* Botões quadrados lado a lado */
-.action-btn {
-    width: 140px;
-    padding: 12px;
-    border-radius: 8px; /* quadrado arredondado */
-    border: none;
-    background: #d7c4b3; /* Nude claro */
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
+#preview-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
 }
 
-.action-btn:nth-child(2) {
-    background: #b89f8d;
+#save-btn, #retry-btn {
+  width: 130px;
+  padding: 12px;
+  border-radius: 8px; /* QUADRADOS */
+  border: none;
+  background: #f1dfd2;
+  color: #5e4634;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#retry-btn {
+  background: #e8d4c4;
 }
 
 #instructions {
-    margin-top: 10px;
-    color: #333;
-    text-align: center;
-    display: none;
+  margin-top: 15px;
+  background: rgba(0,0,0,0.5);
+  padding: 8px;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 13px;
+  text-align: center;
+  display: none;
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <video id="video" autoplay playsinline muted></video>
-<img id="overlay" src="moldura.png" alt="Moldura"/>
+<img id="overlay" src="moldura.png" alt="Moldura">
 
-<!-- Botões principais -->
 <div id="buttons">
-    <button id="switch-camera">🔄</button>
-    <button id="capture">📸</button>
+  <button id="switch-camera">🔄</button>
+  <button id="capture">📸</button>
 </div>
 
 <canvas id="canvas" style="display:none;"></canvas>
 
-<!-- PREVIEW FULLSCREEN -->
 <div id="preview-container">
-    <img id="photo-preview">
-</div>
+  <img id="photo-preview">
 
-<!-- Botões da prévia -->
-<div id="preview-actions">
-    <button id="save-btn" class="action-btn">Salvar</button>
-    <button id="retry-btn" class="action-btn">Tentar de novo</button>
-</div>
+  <div id="preview-buttons">
+    <button id="save-btn">Salvar</button>
+    <button id="retry-btn">Tentar de novo</button>
+  </div>
 
-<div id="instructions">No iPhone, toque e segure a imagem para salvar.</div>
+  <div id="instructions">No iPhone, toque e segure a imagem para salvar.</div>
+</div>
 
 <script>
 let usingFrontCamera = true;
@@ -145,72 +156,69 @@ const canvas = document.getElementById("canvas");
 const captureBtn = document.getElementById("capture");
 const switchCameraBtn = document.getElementById("switch-camera");
 const previewContainer = document.getElementById("preview-container");
-const previewActions = document.getElementById("preview-actions");
 const photoPreview = document.getElementById("photo-preview");
 const saveBtn = document.getElementById("save-btn");
 const retryBtn = document.getElementById("retry-btn");
 const instructions = document.getElementById("instructions");
+
 const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 async function startCamera() {
-    if (stream) stream.getTracks().forEach(t => t.stop());
+  if (stream) stream.getTracks().forEach(t => t.stop());
 
-    stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-            width: { ideal: 1920 },
-            height: { ideal: 1080 },
-            facingMode: usingFrontCamera ? "user" : "environment"
-        }
-    });
+  stream = await navigator.mediaDevices.getUserMedia({
+    video: {
+      width: { ideal: 1920 },
+      height: { ideal: 1080 },
+      facingMode: usingFrontCamera ? "user" : "environment"
+    }
+  });
 
-    video.srcObject = stream;
-    video.style.transform = usingFrontCamera ? "scaleX(-1)" : "scaleX(1)";
+  video.srcObject = stream;
+  video.style.transform = usingFrontCamera ? "scaleX(-1)" : "scaleX(1)";
 }
 
 switchCameraBtn.onclick = () => {
-    usingFrontCamera = !usingFrontCamera;
-    startCamera();
+  usingFrontCamera = !usingFrontCamera;
+  startCamera();
 };
 
 captureBtn.onclick = () => {
-    const track = stream.getVideoTracks()[0];
-    const settings = track.getSettings();
-    const w = settings.width;
-    const h = settings.height;
+  const track = stream.getVideoTracks()[0];
+  const settings = track.getSettings();
+  const w = settings.width;
+  const h = settings.height;
 
-    canvas.width = w;
-    canvas.height = h;
-    const ctx = canvas.getContext("2d");
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d");
 
-    if (usingFrontCamera) {
-        ctx.translate(w, 0);
-        ctx.scale(-1, 1);
-    }
+  if (usingFrontCamera) {
+    ctx.translate(w, 0);
+    ctx.scale(-1, 1);
+  }
 
-    ctx.drawImage(video, 0, 0, w, h);
+  ctx.drawImage(video, 0, 0, w, h);
 
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.drawImage(overlay, 0, 0, w, h);
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.drawImage(overlay, 0, 0, w, h);
 
-    photoPreview.src = canvas.toDataURL("image/png");
-
-    previewContainer.style.display = "flex";
-    previewActions.style.display = "flex";
+  photoPreview.src = canvas.toDataURL("image/png");
+  previewContainer.style.display = "flex";
 };
 
 saveBtn.onclick = () => {
-    const a = document.createElement("a");
-    a.href = photoPreview.src;
-    a.download = "foto.png";
-    a.click();
+  const a = document.createElement("a");
+  a.href = photoPreview.src;
+  a.download = "foto.png";
+  a.click();
 
-    if (isiOS) instructions.style.display = "block";
+  if (isiOS) instructions.style.display = "block";
 };
 
 retryBtn.onclick = () => {
-    previewContainer.style.display = "none";
-    previewActions.style.display = "none";
-    instructions.style.display = "none";
+  previewContainer.style.display = "none";
+  instructions.style.display = "none";
 };
 
 startCamera();
