@@ -16,6 +16,7 @@
     overflow: hidden;
   }
 
+  /* Vídeo + Moldura */
   #video, #overlay {
     position: absolute;
     width: 100vw;
@@ -53,7 +54,7 @@
 
   #buttons button:active { transform: scale(0.95); }
 
-  /* PREVIEW TELA CHEIA */
+  /* PREVIEW TELA CHEIA — SEM REDUZIR TAMANHO, SÓ SUBIR */
   #preview-container {
     position: fixed;
     top: 0;
@@ -61,35 +62,39 @@
     width: 100vw;
     height: 100vh;
     background: rgba(0,0,0,0.85);
+
     display: none;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+
     padding: 20px;
     z-index: 9999;
+
+    /* MOVE TUDO PARA CIMA (AQUI AJUSTA) */
+    transform: translateY(-40px);
   }
 
   #photo-preview {
     max-width: 95%;
-    max-height: 75%;
+    max-height: 75vh; /* mantém a imagem grande */
     border-radius: 12px;
     border: 3px solid #e4cec0;
     object-fit: contain;
+    margin-bottom: 20px;
   }
 
+  /* Botões do preview */
   .button-row {
-    position: absolute;
-    bottom: 30px;
     width: 80%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: 15px;
   }
 
   #save-btn, #retry-btn {
     flex: 1;
     padding: 14px;
-    border-radius: 10px;
+    border-radius: 12px;
     border: none;
     color: #fff;
     font-size: 18px;
@@ -99,8 +104,7 @@
   #retry-btn { background: #b58e72; }
 
   #instructions {
-    position: absolute;
-    bottom: 80px;
+    margin-top: 15px;
     background: rgba(255,255,255,0.15);
     padding: 8px;
     color: #fff;
@@ -109,6 +113,7 @@
     font-size: 14px;
     text-align: center;
   }
+
 </style>
 
 </head>
@@ -128,12 +133,12 @@
 <div id="preview-container">
   <img id="photo-preview">
 
-  <div id="instructions">Toque e segure para salvar no iPhone.</div>
-
   <div class="button-row">
     <button id="save-btn">Salvar</button>
     <button id="retry-btn">Tentar Novamente</button>
   </div>
+
+  <div id="instructions">Toque e segure para salvar no iPhone.</div>
 </div>
 
 <script>
