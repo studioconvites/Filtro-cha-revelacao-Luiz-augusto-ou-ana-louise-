@@ -35,7 +35,7 @@
     pointer-events: none;
   }
 
-  /* Botões */
+  /* Botões principais */
   #buttons {
     position: absolute;
     bottom: 40px;
@@ -86,16 +86,20 @@
     margin-bottom: 10px;
   }
 
+  /* BOTÕES REDONDOS NA PREVIEW */
   #save-btn, #retry-btn {
-    width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    border-radius: 10px;
+    width: 80px;
+    height: 80px;
+    margin-top: 10px;
+    border-radius: 50%;
     border: none;
     background: #d7b89c;
     color: #fff;
-    font-size: 16px;
+    font-size: 26px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   #retry-btn {
@@ -129,8 +133,8 @@
 
 <div id="preview-container">
   <img id="photo-preview">
-  <button id="save-btn">Salvar</button>
-  <button id="retry-btn">Tentar de novo</button>
+  <button id="save-btn">💾</button>
+  <button id="retry-btn">🔁</button>
   <div id="instructions">
     No iPhone, toque e segure a imagem para salvar.
   </div>
@@ -182,15 +186,12 @@
     canvas.height = h;
     const ctx = canvas.getContext("2d");
 
-    /* SE A CÂMERA FOR FRONTAL, ESPELHAR */
     if (usingFrontCamera) {
       ctx.translate(w, 0);
       ctx.scale(-1, 1);
     }
 
-    /* FILTRO TAMBÉM NA FOTO FINAL */
     ctx.filter = "brightness(1.08) contrast(1.1) saturate(1.15)";
-
     ctx.drawImage(video, 0, 0, w, h);
 
     ctx.setTransform(1, 0, 0, 1, 0, 0);
