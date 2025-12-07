@@ -69,14 +69,22 @@
   /* BLOCO INTERNO DA FOTO + BOTÕES */
   #preview-content {
     position: absolute;
-    top: 4vh;  /* <<<<<< AJUSTE DE ALTURA DA MOLDURA */
+    top: 4vh; /* <<<<< distância do topo: ajuste aqui */
     left: 50%;
     transform: translateX(-50%);
-
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  /* FILTRO CORZINHA FORTE NO PREVIEW */
+  .filtro-corzinha-forte {
+    filter: brightness(1.12)
+            contrast(1.12)
+            saturate(1.25)
+            sepia(0.12)
+            hue-rotate(-10deg);
   }
 
   /* FOTO GRANDE NO PREVIEW */
@@ -119,6 +127,7 @@
     font-size: 14px;
     text-align: center;
   }
+
 </style>
 
 </head>
@@ -136,10 +145,10 @@
 
 <!-- PREVIEW EM TELA CHEIA -->
 <div id="preview-container">
-
   <div id="preview-content">
 
-    <img id="photo-preview">
+    <!-- Preview com filtro -->
+    <img id="photo-preview" class="filtro-corzinha-forte">
 
     <div class="button-row">
       <button id="save-btn">Salvar</button>
@@ -149,7 +158,6 @@
     <div id="instructions">Toque e segure para salvar no iPhone.</div>
 
   </div>
-
 </div>
 
 <script>
@@ -162,7 +170,6 @@
   const captureBtn = document.getElementById("capture");
   const switchCameraBtn = document.getElementById("switch-camera");
   const previewContainer = document.getElementById("preview-container");
-  const previewContent = document.getElementById("preview-content");
   const photoPreview = document.getElementById("photo-preview");
   const saveBtn = document.getElementById("save-btn");
   const retryBtn = document.getElementById("retry-btn");
@@ -204,11 +211,16 @@
       ctx.scale(-1, 1);
     }
 
+    /* 🔥 APLICAR FILTRO CORZINHA FORTE NO CANVAS (foto salva também) */
+    ctx.filter = "brightness(1.12) contrast(1.12) saturate(1.25) sepia(0.12) hue-rotate(-10deg)";
     ctx.drawImage(video, 0, 0, w, h);
 
+    /* Moldura sem filtro */
+    ctx.filter = "none";
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.drawImage(overlay, 0, 0, w, h);
 
+    /* Mostra preview */
     photoPreview.src = canvas.toDataURL("image/png");
     previewContainer.style.display = "block";
   };
