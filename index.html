@@ -16,7 +16,6 @@
     overflow: hidden;
   }
 
-  /* Vídeo + Moldura */
   #video, #overlay {
     position: absolute;
     width: 100vw;
@@ -26,16 +25,9 @@
     left: 0;
   }
 
-  /* FILTRO AO VIVO NO VÍDEO */
-  #video {
-    filter: brightness(1.08) contrast(1.1) saturate(1.15);
-  }
+  #overlay { pointer-events: none; }
 
-  #overlay {
-    pointer-events: none;
-  }
-
-  /* Botões principais */
+  /* Botões principais redondos */
   #buttons {
     position: absolute;
     bottom: 40px;
@@ -46,10 +38,10 @@
     z-index: 20;
   }
 
-  button {
+  #buttons button {
     width: 70px;
     height: 70px;
-    border-radius: 50%; 
+    border-radius: 50%;
     border: none;
     background: linear-gradient(135deg, #f8e9da, #f3d4bb);
     font-size: 26px;
@@ -59,66 +51,67 @@
     transition: 0.2s;
   }
 
-  button:active {
-    transform: scale(0.95);
-  }
+  #buttons button:active { transform: scale(0.95); }
 
-  /* Preview */
+  /* PREVIEW TELA CHEIA */
   #preview-container {
-    position: absolute;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 25;
-    background: rgba(255,255,255,0.9);
-    padding: 15px;
-    border-radius: 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.85);
     display: none;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 300px;
+    padding: 20px;
+    z-index: 9999;
   }
 
   #photo-preview {
-    width: 100%;
+    max-width: 95%;
+    max-height: 75%;
     border-radius: 12px;
     border: 3px solid #e4cec0;
-    margin-bottom: 10px;
+    object-fit: contain;
   }
 
-  /* BOTÕES REDONDOS NA PREVIEW */
-  #save-btn, #retry-btn {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: none;
-    background: #d7b89c;
-    color: #fff;
-    font-size: 26px;
-    cursor: pointer;
+  .button-row {
+    position: absolute;
+    bottom: 30px;
+    width: 80%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px auto;
+    justify-content: space-between;
+    gap: 15px;
   }
 
-  #retry-btn {
-    background: #b58e72;
+  #save-btn, #retry-btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
   }
+
+  #save-btn { background: #d7b89c; }
+  #retry-btn { background: #b58e72; }
 
   #instructions {
-    margin-top: 10px;
-    background: rgba(0,0,0,0.5);
+    position: absolute;
+    bottom: 80px;
+    background: rgba(255,255,255,0.15);
     padding: 8px;
     color: #fff;
     border-radius: 8px;
     display: none;
-    font-size: 13px;
+    font-size: 14px;
     text-align: center;
   }
 </style>
-</head>
 
+</head>
 <body>
 
 <video id="video" autoplay playsinline muted></video>
@@ -131,12 +124,15 @@
 
 <canvas id="canvas" style="display:none;"></canvas>
 
+<!-- PREVIEW EM TELA CHEIA -->
 <div id="preview-container">
   <img id="photo-preview">
-  <button id="save-btn">💾</button>
-  <button id="retry-btn">🔁</button>
-  <div id="instructions">
-    No iPhone, toque e segure a imagem para salvar.
+
+  <div id="instructions">Toque e segure para salvar no iPhone.</div>
+
+  <div class="button-row">
+    <button id="save-btn">Salvar</button>
+    <button id="retry-btn">Tentar Novamente</button>
   </div>
 </div>
 
@@ -191,11 +187,9 @@
       ctx.scale(-1, 1);
     }
 
-    ctx.filter = "brightness(1.08) contrast(1.1) saturate(1.15)";
     ctx.drawImage(video, 0, 0, w, h);
 
     ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.filter = "none";
     ctx.drawImage(overlay, 0, 0, w, h);
 
     photoPreview.src = canvas.toDataURL("image/png");
