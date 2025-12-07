@@ -54,10 +54,10 @@
 
   #buttons button:active { transform: scale(0.95); }
 
-  /* PREVIEW TELA CHEIA — SEM REDUZIR TAMANHO, SÓ SUBIR */
+  /* PREVIEW TELA CHEIA — AGORA SOBE DE VERDADE */
   #preview-container {
     position: fixed;
-    top: 0;
+    top: -40px;  /* <-- SOBE O BLOCO INTEIRO DA TELA */
     left: 0;
     width: 100vw;
     height: 100vh;
@@ -65,21 +65,20 @@
 
     display: none;
     flex-direction: column;
+    justify-content: flex-start; /* <-- permite subir */
     align-items: center;
 
-    padding: 20px;
+    padding-top: 40px; /* espaço elegante no topo */
     z-index: 9999;
-
-    /* MOVE TUDO PARA CIMA (AQUI AJUSTA) */
-    transform: translateY(-40px);
   }
 
   #photo-preview {
     max-width: 95%;
-    max-height: 75vh; /* mantém a imagem grande */
+    max-height: 75vh; /* mantém tamanho grande */
     border-radius: 12px;
     border: 3px solid #e4cec0;
     object-fit: contain;
+    margin-top: 20px;
     margin-bottom: 20px;
   }
 
